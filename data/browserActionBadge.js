@@ -27,7 +27,8 @@ self.port.on('setBadgeBackgroundColor', function(colorArray) {
     badgeText.style.borderColor = rgba();
 });
 self.port.on('setIcon', function(url) {
-    document.getElementById('button-img').src = url;
+  var image = document.getElementById('button-img');
+  image.src = url;
 });
 
 self.port.on('enabled', function(enabled) {

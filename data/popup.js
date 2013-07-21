@@ -10,10 +10,13 @@
 function updatePanelDimensions() {
     let wrapper = document.documentElement;
     let dimensions = {
-        height: wrapper.offsetHeight || wrapper.offsetHeight,
+        height: wrapper.offsetHeight || wrapper.scrollHeight,
         width: wrapper.offsetWidth || wrapper.scrollWidth
     };
     self.port.emit('dimensions', dimensions);
+    self.port.on('requestDimensionsUpdate', function(message) {
+      updatePanelDimensions();
+    });
 }
 if (document.readyState == 'complete') {
     updatePanelDimensions();
@@ -25,6 +28,7 @@ if (document.readyState == 'complete') {
         }, 0);
     });
 }
+
 
 const CLOSE_TOKEN = 'window.close.' + Math.random();
 
